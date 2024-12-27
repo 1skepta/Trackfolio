@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addApplication } from "../store/applicationSlice";
 
 function AddApplicationForm() {
+  const [jobTitle, setJobTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [dateApplied, setDateApplied] = useState("");
+  const [status, setStatus] = useState("");
+  const [jobLocation, setJobLocation] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newApplication = {
+      jobTitle,
+      companyName,
+      dateApplied,
+      status,
+      jobLocation,
+    };
+
+    dispatch(addApplication(newApplication));
+
+    setJobTitle("");
+    setCompanyName("");
+    setDateApplied("");
+    setJobLocation("");
+    setStatus("");
+  };
+
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="w-full max-w-lg bg-white shadow-md rounded-lg p-8 border border-gray-200">
         <h1 className="text-2xl font-bold text-blue-600 mb-6 text-center">
           Add Job Application
         </h1>
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
               className="block text-blue-600 font-semibold mb-2"
@@ -16,8 +46,10 @@ function AddApplicationForm() {
               Job Title
             </label>
             <input
+              value={jobTitle}
+              onChange={(e) => setJobTitle(e.target.value)}
               type="text"
-              id="jobTitle"
+              required
               placeholder="Enter job title"
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
@@ -31,7 +63,9 @@ function AddApplicationForm() {
             </label>
             <input
               type="text"
-              id="companyName"
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
+              required
               placeholder="Enter company name"
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
@@ -46,7 +80,9 @@ function AddApplicationForm() {
             </label>
             <input
               type="date"
-              id="dateApplied"
+              value={dateApplied}
+              onChange={(e) => setDateApplied(e.target.value)}
+              required
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
@@ -60,7 +96,9 @@ function AddApplicationForm() {
                 <input
                   type="radio"
                   name="status"
-                  value="applied"
+                  value="Applied"
+                  checked={status === "Applied"}
+                  onChange={(e) => setStatus(e.target.value)}
                   className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer"
                 />
                 <span>Applied</span>
@@ -69,7 +107,9 @@ function AddApplicationForm() {
                 <input
                   type="radio"
                   name="status"
-                  value="interview"
+                  value="Interview"
+                  checked={status === "Interview"}
+                  onChange={(e) => setStatus(e.target.value)}
                   className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer"
                 />
                 <span>Interview</span>
@@ -78,7 +118,9 @@ function AddApplicationForm() {
                 <input
                   type="radio"
                   name="status"
-                  value="offer"
+                  value="Offer"
+                  checked={status === "Offer"}
+                  onChange={(e) => setStatus(e.target.value)}
                   className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer"
                 />
                 <span>Offer</span>
@@ -94,7 +136,9 @@ function AddApplicationForm() {
             </label>
             <input
               type="text"
-              id="jobLocation"
+              value={jobLocation}
+              onChange={(e) => setJobLocation(e.target.value)}
+              required
               placeholder="Enter job location"
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
