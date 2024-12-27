@@ -36,6 +36,7 @@ function AddApplicationForm() {
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
+
           <div>
             <label
               className="block text-blue-600 font-semibold mb-2"
@@ -49,35 +50,36 @@ function AddApplicationForm() {
               className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring focus:ring-blue-300"
             />
           </div>
+
           <div>
             <span className="block text-blue-600 font-semibold mb-2">
               Status
             </span>
             <div className="flex space-x-4">
-              <label className="flex items-center space-x-2">
+              <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="radio"
                   name="status"
                   value="applied"
-                  className="text-blue-600 focus:ring focus:ring-blue-300"
+                  className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer"
                 />
                 <span>Applied</span>
               </label>
-              <label className="flex items-center space-x-2">
+              <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="radio"
                   name="status"
                   value="interview"
-                  className="text-blue-600 focus:ring focus:ring-blue-300"
+                  className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer"
                 />
                 <span>Interview</span>
               </label>
-              <label className="flex items-center space-x-2">
+              <label className="flex items-center space-x-2 cursor-pointer">
                 <input
                   type="radio"
                   name="status"
                   value="offer"
-                  className="text-blue-600 focus:ring focus:ring-blue-300"
+                  className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer"
                 />
                 <span>Offer</span>
               </label>
