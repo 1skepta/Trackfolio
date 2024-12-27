@@ -13,8 +13,6 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-
-      <div className="bg-red-500">hello</div>
     </div>
   );
 }
