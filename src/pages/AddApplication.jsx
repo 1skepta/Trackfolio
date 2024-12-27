@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import AddApplicationForm from "../components/AddApplicationForm";
 
 function AddApplication() {
   return (
-    <div>AddApplication</div>
-  )
+    <div>
+      <h1>Add Application</h1>
+      <AddApplicationForm />
+    </div>
+  );
 }
 
-export default AddApplication
+export default AddApplication;
