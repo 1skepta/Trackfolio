@@ -1,13 +1,39 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import ApplicationDetail from "./ApplicationDetail";
 
 function ApplicationsList() {
   const applications = useSelector((state) => state.applications.applications);
-  const dispatch = useDispatch();
+  const [selectedApplication, setSelectedApplication] = useState(null);
+
+  useEffect(() => {
+    if (selectedApplication) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [selectedApplication]);
+
+  const handleApplicationClick = (application) => {
+    setSelectedApplication(application);
+  };
+
+  const handleCloseDetail = () => {
+    setSelectedApplication(null);
+  };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center">
-      <div className="w-full max-w-4xl bg-white shadow-md rounded-lg p-8 border border-gray-200">
+    <div className="min-h-screen bg-white flex items-center justify-center relative">
+      {/* Overlay */}
+      {selectedApplication && (
+        <div className="fixed inset-0 bg-black opacity-50 z-10"></div>
+      )}
+
+      {/* Main content */}
+      <div className="w-full max-w-4xl bg-white shadow-md rounded-lg p-8 border border-gray-200 relative z-0">
         <h1 className="text-2xl font-bold text-blue-600 mb-6 text-center">
           Applications List
         </h1>
@@ -15,7 +41,8 @@ function ApplicationsList() {
           {applications.map((application, index) => (
             <li
               key={index}
-              className="p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-200"
+              className="p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-200 cursor-pointer"
+              onClick={() => handleApplicationClick(application)}
             >
               <div className="flex items-center justify-between">
                 <div className="flex-1">
@@ -47,6 +74,17 @@ function ApplicationsList() {
           ))}
         </ul>
       </div>
+
+      {selectedApplication && (
+        <div className="fixed inset-0 flex justify-center items-center z-20">
+          <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
+            <ApplicationDetail
+              application={selectedApplication}
+              onClose={handleCloseDetail}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
