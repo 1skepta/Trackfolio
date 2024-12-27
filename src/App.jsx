@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import AddApplication from "./pages/AddApplication";
@@ -14,6 +13,8 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
+
+      <div className="bg-red-500">hello</div>
     </div>
   );
 }
