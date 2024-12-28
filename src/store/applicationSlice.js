@@ -17,8 +17,22 @@ const applicationSlice = createSlice({
         (application) => application.id !== action.payload
       );
     },
+    editApplication: (state, action) => {
+      const { id, updatedData } = action.payload;
+      const applicationIndex = state.applications.findIndex(
+        (application) => application.id === id
+      );
+
+      if (applicationIndex !== 1) {
+        state.applications[applicationIndex] = {
+          ...state.applications[applicationIndex],
+          ...updatedData,
+        };
+      }
+    },
   },
 });
-export const { addApplication, deleteApplication } = applicationSlice.actions;
+export const { addApplication, deleteApplication, editApplication } =
+  applicationSlice.actions;
 
 export default applicationSlice.reducer;
