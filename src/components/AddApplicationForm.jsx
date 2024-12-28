@@ -15,6 +15,7 @@ function AddApplicationForm() {
     e.preventDefault();
 
     const newApplication = {
+      id: Date.now(),
       jobTitle,
       companyName,
       dateApplied,

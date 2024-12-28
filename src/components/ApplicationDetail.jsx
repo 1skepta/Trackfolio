@@ -1,11 +1,23 @@
 import React from "react";
+import { deleteApplication } from "../store/applicationSlice";
+import { useDispatch } from "react-redux";
 
 function ApplicationDetail({ application, onClose }) {
+  const dispatch = useDispatch();
+
   return (
     <div className="mt-8 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
-      <h2 className="text-2xl font-bold text-blue-600 mb-4">
-        Detailed Application Information
-      </h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold text-blue-600 mb-4">
+          Detailed Application Information
+        </h2>
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded-full"
+          onClick={onClose}
+        >
+          X
+        </button>
+      </div>
       <div className="space-y-4">
         <div>
           <h3 className="text-lg font-semibold">Job Title:</h3>
@@ -28,12 +40,23 @@ function ApplicationDetail({ application, onClose }) {
           <p>{application.jobLocation}</p>
         </div>
       </div>
-      <button
-        className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
-        onClick={onClose}
-      >
-        Close
-      </button>
+      <div className=" flex items-center justify-between">
+        <button
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+          onClick={onClose}
+        >
+          Edit
+        </button>
+        <button
+          className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+          onClick={() => {
+            dispatch(deleteApplication(application.id));
+            onClose();
+          }}
+        >
+          Delete
+        </button>
+      </div>
     </div>
   );
 }
