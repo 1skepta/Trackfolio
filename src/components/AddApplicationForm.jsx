@@ -29,6 +29,8 @@ function AddApplicationForm() {
     setDateApplied("");
     setJobLocation("");
     setStatus("");
+
+    alert("New Application Added");
   };
 
   return (
