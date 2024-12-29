@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addApplication } from "../store/applicationSlice";
+import { useNavigate } from "react-router-dom";
 
 function AddApplicationForm() {
+  const navigate = useNavigate();
+
   const [jobTitle, setJobTitle] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [dateApplied, setDateApplied] = useState("");
@@ -32,6 +35,8 @@ function AddApplicationForm() {
     setStatus("");
 
     alert("New Application Added");
+
+    navigate("/home");
   };
 
   return (
