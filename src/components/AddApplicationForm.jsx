@@ -133,7 +133,7 @@ function AddApplicationForm() {
                 />
                 <span>Offer</span>
               </label>
-              <label className="flex items-center space-x-2 cursor-pointer hidden">
+              <label className="items-center space-x-2 cursor-pointer hidden">
                 <input
                   type="radio"
                   name="status"
