@@ -133,6 +133,17 @@ function AddApplicationForm() {
                 />
                 <span>Offer</span>
               </label>
+              <label className="flex items-center space-x-2 cursor-pointer hidden">
+                <input
+                  type="radio"
+                  name="status"
+                  value="Rejected"
+                  checked={status === "Rejected"}
+                  onChange={(e) => setStatus(e.target.value)}
+                  className="text-blue-600 focus:ring focus:ring-blue-300 cursor-pointer "
+                />
+                <span>Rejected</span>
+              </label>
             </div>
           </div>
           <div>

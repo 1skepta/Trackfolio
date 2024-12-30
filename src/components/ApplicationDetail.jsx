@@ -52,22 +52,24 @@ function ApplicationDetail({ application, onClose }) {
             {key === "status" ? (
               isEditing ? (
                 <div className="space-x-4">
-                  {["Applied", "Interview", "Offer"].map((statusOption) => (
-                    <label
-                      key={statusOption}
-                      className="inline-flex items-center"
-                    >
-                      <input
-                        type="radio"
-                        name="status"
-                        value={statusOption}
-                        checked={newData.status === statusOption}
-                        onChange={handleInputChange}
-                        className="mr-2"
-                      />
-                      {statusOption}
-                    </label>
-                  ))}
+                  {["Applied", "Interview", "Offer", "Rejected"].map(
+                    (statusOption) => (
+                      <label
+                        key={statusOption}
+                        className="inline-flex items-center"
+                      >
+                        <input
+                          type="radio"
+                          name="status"
+                          value={statusOption}
+                          checked={newData.status === statusOption}
+                          onChange={handleInputChange}
+                          className="mr-2"
+                        />
+                        {statusOption}
+                      </label>
+                    )
+                  )}
                 </div>
               ) : (
                 <p>{newData.status}</p>
