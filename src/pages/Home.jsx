@@ -84,15 +84,17 @@ function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 flex flex-col p-6">
-      <div className="flex items-center flex-row mb-6 justify-between">
-        <h2 className="text-3xl font-semibold text-blue-600 dark:text-blue-400 text-center sm:text-4xl">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-semibold text-blue-600 dark:text-blue-400 sm:text-4xl absolute left-1/2 transform -translate-x-1/2">
           Dashboard
         </h2>
         <img
           src={theme === "light" ? moon : sun}
           alt="theme logo"
           onClick={() => dispatch(toggleTheme())}
-          className="cursor-pointer"
+          className={`cursor-pointer ml-auto ${
+            theme === "light" ? "filter invert" : ""
+          }`}
         />
       </div>
 
