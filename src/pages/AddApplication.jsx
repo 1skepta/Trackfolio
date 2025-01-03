@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addApplication } from "../store/applicationSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -39,6 +39,7 @@ function AddApplication() {
     navigate("/home");
   };
 
+  const theme = useSelector((state) => state.theme.theme);
   return (
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="w-full max-w-lg bg-white p-8 lg:shadow-md lg:rounded-lg lg:border lg:border-gray-200">

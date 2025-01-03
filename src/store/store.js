@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import applicationSlice from "./applicationSlice";
+import themeReducer from "./themeSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,6 +14,7 @@ const persistedReducer = persistReducer(persistConfig, applicationSlice);
 const store = configureStore({
   reducer: {
     applications: persistedReducer,
+    theme: themeReducer,
   },
 });
 
