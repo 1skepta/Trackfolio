@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { deleteApplication, editApplication } from "../store/applicationSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function ApplicationDetail({ application, onClose }) {
   const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme.theme);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newData, setNewData] = useState({
@@ -13,8 +14,27 @@ function ApplicationDetail({ application, onClose }) {
     status: application.status,
     jobLocation: application.jobLocation,
   });
+  const [error, setError] = useState("");
+
+  // Validate if any fields are empty
+  const validateFields = () => {
+    for (let key in newData) {
+      if (newData[key] === "") {
+        setError(
+          `${key.replace(/([A-Z])/g, " $1").toUpperCase()} cannot be empty.`
+        );
+        return false;
+      }
+    }
+    setError("");
+    return true;
+  };
 
   const handleEdit = () => {
+    if (!validateFields()) {
+      return;
+    }
+
     if (isEditing) {
       dispatch(editApplication({ id: application.id, updatedData: newData }));
     }
@@ -30,7 +50,11 @@ function ApplicationDetail({ application, onClose }) {
   };
 
   return (
-    <div className="mt-8 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+    <div
+      className={`mt-8 p-6 ${
+        theme === "dark" ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+      } shadow-lg rounded-lg border border-gray-200`}
+    >
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-blue-600">
           Application Details
@@ -80,7 +104,12 @@ function ApplicationDetail({ application, onClose }) {
                 name={key}
                 value={newData[key]}
                 onChange={handleInputChange}
-                className="w-full p-2 mt-1 border border-gray-300 rounded-md"
+                className={`w-full p-2 mt-1 border ${
+                  theme === "dark"
+                    ? "border-gray-600 bg-gray-700 text-gray-300"
+                    : "border-gray-300 bg-white text-gray-800"
+                } rounded-md placeholder-gray-500`}
+                placeholder={`Enter ${key.replace(/([A-Z])/g, " $1")}`}
               />
             ) : (
               <p>{newData[key]}</p>
@@ -88,6 +117,8 @@ function ApplicationDetail({ application, onClose }) {
           </div>
         ))}
       </div>
+
+      {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
 
       <div className="flex items-center justify-between mt-4">
         <button
